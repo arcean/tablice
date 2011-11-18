@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=com.arcean.tablice
+Exec=/usr/bin/invoker --splash=/opt/tablice/share/portrait.jpg --splash-landscape=/opt/tablice/share/landscape.jpg --single-instance --type=d /opt/tablice/bin/tablice
+
