@@ -1,3 +1,9 @@
+tablice (1.0.0) unstable; urgency=low
+
+  * Final, public release.
+
+ -- Tomasz Pieniążek <Tomek@unknown>  Sun, 20 Nov 2011 16:13:21 +0200
+
 tablice (0.9.7) unstable; urgency=low
 
   * Second public release.

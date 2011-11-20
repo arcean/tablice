@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 QueryDialog {
     id: dialog
 
-    titleText: "Baza tablic rejestracyjnych 0.9.8-tp1"
+    titleText: "Tablice 1.0.0-tp3"
     icon: "/usr/share/icons/hicolor/80x80/apps/tablice.png"
     message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011 <br><br>"
 
@@ -20,7 +20,7 @@ QueryDialog {
         opacity: 0
         textFormat: Text.RichText
         text: "Strona internetowa: <a href=\"http://www.maemo-forum.pl\">maemo-forum.pl</a>"
-        onLinkActivated: Qt.openUrlExternally(link);
+        onLinkActivated: Qt.openUrlExternally("http://maemo-forum.pl/meego-tablice-vt2066.htm");
 
         transitions: Transition {
             from: ""; to: "show"; reversible: false

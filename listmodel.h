@@ -6,6 +6,7 @@
 #include <QVariant>
 
 #include "plateitem.h"
+#include "settings.h"
 
 class ListItem: public QObject {
   Q_OBJECT
@@ -28,6 +29,7 @@ class ListModel : public QAbstractListModel
 public:
     explicit ListModel(PlateItem* prototype, QObject* parent = 0);
     ~ListModel();
+    void setSettings(Settings *settings);
 
     ListModel* searchModel;
 
@@ -51,6 +53,7 @@ private:
     PlateItem* m_prototype;
     QObject *parent;
     QList<PlateItem*> m_list;
+    Settings *settings;
 
 };
 

@@ -35,7 +35,8 @@ CONFIG += qt-boostable qdeclarative-boostable meegotouch
 SOURCES += main.cpp \
     tables.cpp \
     listmodel.cpp \
-    plateitem.cpp
+    plateitem.cpp \
+    settings.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -46,7 +47,8 @@ OTHER_FILES +=
 HEADERS += \
     tables.h \
     listmodel.h \
-    plateitem.h
+    plateitem.h \
+    settings.h
 
 INCLUDEPATH += /usr/include/applauncherd
 
@@ -61,6 +63,8 @@ contains(MEEGO_EDITION,harmattan) {
     splashes.path = /opt/tablice/data/
     INSTALLS += baza desktopfile icon splashes
 }
+
+
 
 
 

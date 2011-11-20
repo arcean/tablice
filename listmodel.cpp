@@ -89,8 +89,6 @@ void ListModel::searchFor(const QString &value)
     else if (number == 4)
         chopAt = newValue.length() - 3;
 
-    qDebug() << "Number: " << number << " chopAt: " << chopAt;
-
     if(number != -1)
         newValue.chop(chopAt);
 
@@ -101,7 +99,9 @@ void ListModel::searchFor(const QString &value)
         foreach(PlateItem* item, m_list) {
             newItem = new PlateItem(item->name(), item->wojewodztwo());
             if(item->name().startsWith(newValue, Qt::CaseInsensitive)
-                    || item->powiat().startsWith(newValue, Qt::CaseInsensitive) || item->miasto().startsWith(newValue, Qt::CaseInsensitive)){
+                    || ( item->powiat().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByDistrict())
+                    || ( item->miasto().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByCity())
+                    || ( item->wojewodztwo().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByDistrictB())){
 
                 newItem->setMiasto(item->miasto());
                 newItem->setPowiat(item->powiat());
@@ -164,4 +164,9 @@ PlateItem * ListModel::takeRow(int row)
   PlateItem* item = m_list.takeAt(row);
   endRemoveRows();
   return item;
+}
+
+void ListModel::setSettings(Settings *settings)
+{
+    this->settings = settings;
 }

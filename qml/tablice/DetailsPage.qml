@@ -10,8 +10,6 @@ Page {
     property string kod: ""
 
     tools: ToolBarLayout {
-        id: toolBar
-
         ToolIcon {
             platformIconId: "toolbar-back"
             onClicked: appWindow.pageStack.pop()

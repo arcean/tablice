@@ -38,6 +38,12 @@ PageStackWindow {
         aboutDialog.open();
     }
 
+    function showSettingsPage()
+    {
+        var settingsPage = ObjectCreator.createObject(Qt.resolvedUrl("SettingsPage.qml"), appWindow.pageStack);
+        pageStack.push(settingsPage)
+    }
+
     function openInsertToDetails()
     {
         var inserSheet = ObjectCreator.createObject(Qt.resolvedUrl("InsertDetailsSheet.qml"), appWindow.pageStack);
@@ -55,9 +61,9 @@ PageStackWindow {
         visible: true
 
         ToolIcon {
-            platformIconId: "toolbar-tag"
+            platformIconId: "toolbar-settings"
             anchors.right: parent.right
-            onClicked: showAboutDialog()
+            onClicked: showSettingsPage()
         }
     }
 }

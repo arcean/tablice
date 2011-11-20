@@ -25,7 +25,7 @@ Page {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
             x: (parent.width / 2) - titleLabel.width/2
-            text: "Baza tablic rejestracyjnych"
+            text: "Lista tablic rejestracyjnych"
             color: "white"
             font.pixelSize: 26
         }
@@ -38,13 +38,14 @@ Page {
         width: parent.width - 40
         height: parent.height - y
         model: Plates
-        delegate:  MyDelegate {}
+        delegate: MyDelegate {}
     }
     ScrollDecorator {
         flickableItem: listView
     }
 
-    function searchList(query) {
+    function searchList(query)
+    {
         searchInput.focus = false;
         searchInput.platformCloseSoftwareInputPanel();
         filter = query
@@ -56,7 +57,8 @@ Page {
         listView.focus = true
     }
 
-    function searchClear() {
+    function searchClear()
+    {
         listView.model = fullModel
         filter = ""
         searchInput.text = ""
