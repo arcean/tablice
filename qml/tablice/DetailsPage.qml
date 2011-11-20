@@ -93,7 +93,7 @@ Page {
         }
         Label {
             id: codeLabelDetails
-            y: codeLabel.y + 20
+            y: codeLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: kod
             font.pixelSize: _STANDARD_FONT_SIZE
@@ -109,7 +109,7 @@ Page {
         }
         Label {
             id: wojewodztwoLabelDetails
-            y: wojewodztwoLabel.y + 20
+            y: wojewodztwoLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: wojewodztwo
             font.pixelSize: _STANDARD_FONT_SIZE
@@ -125,7 +125,7 @@ Page {
         }
         Label {
             id: powiatLabelDetails
-            y: powiatLabel.y + 20
+            y: powiatLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: powiat
             font.pixelSize: _STANDARD_FONT_SIZE
@@ -141,7 +141,7 @@ Page {
         }
         Label {
             id: miastoLabelDetails
-            y: miastoLabel.y + 20
+            y: miastoLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: miasto
             font.pixelSize: _STANDARD_FONT_SIZE

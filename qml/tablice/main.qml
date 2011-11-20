@@ -4,7 +4,7 @@ import "createobject.js" as ObjectCreator
 
 PageStackWindow {
     id: appWindow
-    property string _APP_COLOR: "color12"
+    property string _APP_COLOR: "color17"
     property string _ICON_LOCATION: "/usr/share/themes/blanco/meegotouch/icons/"
     property string _IMAGE_LOCATION: "/usr/share/themes/blanco/meegotouch/images/"
     property int _SMALL_FONT_SIZE: 18
@@ -24,7 +24,7 @@ PageStackWindow {
     }
 
     platformStyle: PageStackWindowStyle {
-        background: "image://theme/meegotouch-video-background"
+        background: "image://theme/meegotouch-pin-background"
         backgroundFillMode: Image.Stretch
     }
 

@@ -1,7 +1,6 @@
 import Qt 4.7
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import "search.js" as Search
 import "UIConstants.js" as UI
 
 Page {
@@ -13,6 +12,7 @@ Page {
 
     Image {
         id: header
+        visible: parent.height > parent.width
         anchors {
             left: parent.left
             right: parent.right
@@ -66,7 +66,7 @@ Page {
 
     Image {
         x: 0
-        y: header.x + header.height
+        y: parent.height > parent.width ? header.x + header.height : 0
         width: parent.width
         height: (searchItem.y + searchItem.height + 10) - y
         source: "images/toolbar-background.png"
@@ -78,7 +78,14 @@ Page {
         id: searchItem
 
         height: searchInput.height
-        anchors { left: parent.left; leftMargin: 20; right: parent.right; rightMargin: 20; top: header.bottom; topMargin: 10 }
+        anchors {
+            left: parent.left;
+            leftMargin: 20;
+            right: parent.right;
+            rightMargin: 20;
+            top: parent.height > parent.width ? header.bottom : parent.top;
+            topMargin: 10
+        }
 
         Behavior on opacity { PropertyAnimation { duration: 300 } }
 

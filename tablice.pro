@@ -23,10 +23,10 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # CONFIG += mobility
 # MOBILITY +=
 
-# Speed up launching on MeeGo/Harmattan when using applauncherd daemon
-CONFIG += qdeclarative-boostable
-
 QT += sql opengl
+
+# enable booster
+CONFIG += qt-boostable qdeclarative-boostable meegotouch
 
 # Add dependency to Symbian components
 # CONFIG += qt-components
@@ -48,6 +48,8 @@ HEADERS += \
     listmodel.h \
     plateitem.h
 
+INCLUDEPATH += /usr/include/applauncherd
+
 contains(MEEGO_EDITION,harmattan) {
     baza.path = /home/user/.tablice
     baza.files = data/tablice.db.sqlite
@@ -55,8 +57,11 @@ contains(MEEGO_EDITION,harmattan) {
     desktopfile.path = /usr/share/applications
     icon.files = data/tablice.png
     icon.path = /usr/share/icons/hicolor/80x80/apps
-    INSTALLS += baza desktopfile icon
+    splashes.files = data/landscape.png data/portrait.png
+    splashes.path = /opt/tablice/data/
+    INSTALLS += baza desktopfile icon splashes
 }
+
 
 
 

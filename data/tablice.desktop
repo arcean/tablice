@@ -4,7 +4,7 @@ Version=1.0
 Type=Application
 Terminal=false
 Name=Tablice
-Exec=/usr/bin/single-instance /opt/tablice/bin/tablice
+Exec=/usr/bin/invoker --single-instance --splash=/opt/tablice/data/portrait.png --splash-landscape=/opt/tablice/data/landscape.png --type=d /opt/tablice/bin/tablice
 Icon=/usr/share/icons/hicolor/80x80/apps/tablice.png
 X-Window-Icon=
 X-HildonDesk-ShowInToolbar=true
