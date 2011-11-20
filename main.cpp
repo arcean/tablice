@@ -30,12 +30,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     context->setContextProperty("Plates", plates);
 
     view->setViewport(new QGLWidget());
-    qDebug() << "F: " << app->applicationFilePath();
-    //view->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    //view->setMainQmlFile(QLatin1String("qml/tablice/main.qml"));
     view->setSource(QUrl::fromLocalFile("/opt/tablice/qml/tablice/main.qml"));
 
-    //view->showExpanded();
     view->showFullScreen();
 
     return app->exec();
