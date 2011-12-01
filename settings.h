@@ -19,6 +19,8 @@ public slots:
     bool getEnableSearchingByDistrict();
     bool getEnableSearchingByDistrictB();
     bool getEnableSearchingBySpecialPlates();
+    void setLiveSearch(bool enable);
+    bool getLiveSearch();
 
 };
 

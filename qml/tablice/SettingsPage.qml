@@ -59,7 +59,7 @@ Page {
 
         Label {
             id: searchByCity
-            y: title.y + title.height + 32
+            y: title.y + title.height + 20
             x: 2 * UI.LISTDELEGATE_MARGIN
             text: "nazwach miast"
         }
@@ -77,7 +77,7 @@ Page {
 
         Label {
             id: searchByDistrict
-            y: searchByCity.y + searchByCity.height + 32
+            y: searchByCity.y + searchByCity.height + 20
             x: 2 * UI.LISTDELEGATE_MARGIN
             text: "nazwach powiatów"
         }
@@ -95,7 +95,7 @@ Page {
 
         Label {
             id: searchByDistrictB
-            y: searchByDistrict.y + searchByDistrict.height + 32
+            y: searchByDistrict.y + searchByDistrict.height + 20
             x: 2 * UI.LISTDELEGATE_MARGIN
             text: "nazwach województw"
         }
@@ -111,5 +111,35 @@ Page {
             }
         }
 
+        Label {
+            id: title2
+            y: searchByDistrictB.y + searchByDistrictB.height + 32
+            text: "Inne:  "
+            color: UI.LISTDELEGATE_TEXT_COLOR
+        }
+
+        Separator {
+            y: title2.y + 10
+            anchors.left: title.right
+            anchors.right: parent.right
+        }
+
+        Label {
+            id: livesearchLabel
+            y: title2.y + title2.height + 20
+            x: 2 * UI.LISTDELEGATE_MARGIN
+            text: "wyszukuj na bieżąco"
+        }
+
+        MySwitch {
+            id: livesearchSwitch
+            y: livesearchLabel.y - 8
+            anchors.right: parent.right
+            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            checked: Settings.getLiveSearch()
+            onCheckedChanged: {
+                Settings.setLiveSearch(checked)
+            }
+        }
     }
 }

@@ -65,3 +65,18 @@ bool Settings::getEnableSearchingBySpecialPlates()
 
     return value;
 }
+
+void Settings::setLiveSearch(bool enable)
+{
+    QSettings settings;
+
+    settings.setValue("searching/livesearch", enable);
+}
+
+bool Settings::getLiveSearch()
+{
+    QSettings settings;
+    bool value =  settings.value("searching/livesearch", true).toBool();
+
+    return value;
+}

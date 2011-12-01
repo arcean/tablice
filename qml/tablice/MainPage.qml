@@ -46,15 +46,11 @@ Page {
 
     function searchList(query)
     {
-        searchInput.focus = false;
-        searchInput.platformCloseSoftwareInputPanel();
         filter = query
         listView.model = fullModel
         Plates.searchFor(query)
         filtermodel = EmptyPlates
         listView.model = filtermodel
-        searchInput.focus = false
-        listView.focus = true
     }
 
     function searchClear()
@@ -103,9 +99,23 @@ Page {
                 actionKeyLabel: qsTr("Gotowe")
                 actionKeyIcon: ""
             }
-            Keys.onEnterPressed: searchList(searchInput.text)
-            Keys.onReturnPressed: searchList(searchInput.text)
-            onTextChanged: filter = ""
+            Keys.onEnterPressed: {
+                searchInput.platformCloseSoftwareInputPanel();
+                searchList(searchInput.text)
+                searchInput.focus = false
+                listView.focus = true
+            }
+            Keys.onReturnPressed: {
+                searchInput.platformCloseSoftwareInputPanel();
+                searchList(searchInput.text)
+                searchInput.focus = false
+                listView.focus = true
+            }
+            onTextChanged: {
+                filter = ""
+                if (Settings.getLiveSearch())
+                    searchList(searchInput.text)
+            }
         }
 
         Image {

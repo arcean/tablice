@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 QueryDialog {
     id: dialog
 
-    titleText: "Tablice 1.0.0-tp3"
+    titleText: "Tablice 1.0.0-tp5"
     icon: "/usr/share/icons/hicolor/80x80/apps/tablice.png"
     message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011 <br><br>"
 
