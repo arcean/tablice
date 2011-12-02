@@ -32,6 +32,7 @@ public:
     void setSettings(Settings *settings);
 
     ListModel* searchModel;
+    QList<PlateItem*> m_list;
 
 public slots:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -46,13 +47,12 @@ public slots:
     QModelIndex indexFromItem( const PlateItem* item) const;
     void clear();
     void handleItemChange();
-    void searchFor(const QString &value);
+    void searchFor(const QString &value, bool mode);
     int checkIfNumbersNow(QString data);
 
 private:
     PlateItem* m_prototype;
     QObject *parent;
-    QList<PlateItem*> m_list;
     Settings *settings;
 
 };

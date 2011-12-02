@@ -77,7 +77,7 @@ int ListModel::checkIfNumbersNow(QString data)
     return -1;
 }
 
-void ListModel::searchFor(const QString &value)
+void ListModel::searchFor(const QString &value, bool mode)
 {
 
     int number = checkIfNumbersNow(value);
@@ -92,33 +92,64 @@ void ListModel::searchFor(const QString &value)
     if(number != -1)
         newValue.chop(chopAt);
 
-    searchModel->clear();
+    QList<PlateItem*> cacheList;
+    ListModel* cache = new ListModel(new PlateItem, this);
+
+    if(mode) {
+        searchModel->clear();
+        foreach(PlateItem* item, m_list) {
+            cacheList.append(item);
+        }
+    }
+    else {
+        foreach(PlateItem* item, searchModel->m_list) {
+            cacheList.append(item);
+        }
+    }
+
     PlateItem *newItem;
+    bool add = false;
 
     if(number == -1) {
-        foreach(PlateItem* item, m_list) {
+        foreach(PlateItem* item, cacheList) {
+            add = false;
             newItem = new PlateItem(item->name(), item->wojewodztwo());
-            if(item->name().startsWith(newValue, Qt::CaseInsensitive)
-                    || ( item->powiat().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByDistrict())
-                    || ( item->miasto().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByCity())
-                    || ( item->wojewodztwo().startsWith(newValue, Qt::CaseInsensitive) && settings->getEnableSearchingByDistrictB())){
 
+            if(settings->getEnableSearchingByDistrict()) {
+                if(item->powiat().startsWith(newValue, Qt::CaseInsensitive))
+                    add = true;
+            }
+            if(settings->getEnableSearchingByCity()) {
+                if(item->miasto().startsWith(newValue, Qt::CaseInsensitive))
+                    add = true;
+            }
+            if(settings->getEnableSearchingByDistrictB()) {
+                if(item->wojewodztwo().startsWith(newValue, Qt::CaseInsensitive))
+                    add = true;
+            }
+
+            if(item->name().startsWith(newValue, Qt::CaseInsensitive) || add){
                 newItem->setMiasto(item->miasto());
                 newItem->setPowiat(item->powiat());
-                searchModel->appendRow(newItem);
+                cache->appendRow(newItem);
             }
         }
     }
     else {
-        foreach(PlateItem* item, m_list) {
+        foreach(PlateItem* item, cacheList) {
             newItem = new PlateItem(item->name(), item->wojewodztwo());
             if(QString::compare(item->name(), newValue, Qt::CaseInsensitive) == 0){
                 newItem->setMiasto(item->miasto());
                 newItem->setPowiat(item->powiat());
-                searchModel->appendRow(newItem);
+                cache->appendRow(newItem);
             }
         }
     }
+    searchModel->clear();
+    foreach(PlateItem* item, cache->m_list) {
+        searchModel->appendRow(item);
+    }
+
 }
 
 QModelIndex ListModel::indexFromItem(const PlateItem *item) const

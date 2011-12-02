@@ -21,6 +21,7 @@ public slots:
     void createMainTable();
     void createDetailsTable();
     void openDatabase();
+    void closeDatabase();
     int getIdsNumber();
     QString getTableCodeFromId(int id);
     void setListModel(ListModel *model);

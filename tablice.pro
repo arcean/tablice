@@ -53,7 +53,7 @@ HEADERS += \
 INCLUDEPATH += /usr/include/applauncherd
 
 contains(MEEGO_EDITION,harmattan) {
-    baza.path = /home/user/.tablice
+    baza.path = /opt/tablice/data/
     baza.files = data/tablice.db.sqlite
     desktopfile.files = data/$${TARGET}.desktop
     desktopfile.path = /usr/share/applications

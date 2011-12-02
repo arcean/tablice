@@ -9,12 +9,20 @@ Tables::Tables(QObject *parent) :
 void Tables::openDatabase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    QString path(QDir::home().path());
-    path.append(QDir::separator()).append(".tablice");
+    QString path(QDir::separator());
+    path.append("opt");
+    path.append(QDir::separator()).append("tablice");
+    path.append(QDir::separator()).append("data");
     path.append(QDir::separator()).append("tablice.db.sqlite");
     path = QDir::toNativeSeparators(path);
     db.setDatabaseName(path);
     db.open();
+}
+
+void Tables::closeDatabase()
+{
+    if(db->isOpen())
+        db->close();
 }
 
 void Tables::setListModel(ListModel *model)

@@ -8,7 +8,17 @@ Page {
     property string filter: ""
     property QtObject filtermodel: EmptyPlates
     property QtObject fullModel
-    property variant uniqueChars: undefined
+    property bool firstSearch: true
+    property int textLength: 0
+
+    Component.onCompleted: {
+        Tables.openDatabase();
+        Tables.createMainTable();
+        Tables.createDetailsTable();
+        Tables.loadDataToModel();
+        Tables.tabliceTymczasowe();
+        mainPage.fullModel = Plates;
+    }
 
     Image {
         id: header
@@ -46,20 +56,30 @@ Page {
 
     function searchList(query)
     {
+        // Abort when searchInput text is empty
+        if(searchInput.text == "" && !Settings.getLiveSearch())
+            return;
+
+        if(searchInput.text.length < textLength || !Settings.getLiveSearch())
+            firstSearch = true;
+        textLength = searchInput.text.length
         filter = query
         listView.model = fullModel
-        Plates.searchFor(query)
+        Plates.searchFor(query, firstSearch)
         filtermodel = EmptyPlates
         listView.model = filtermodel
+        firstSearch = false;
     }
 
     function searchClear()
     {
-        listView.model = fullModel
         filter = ""
         searchInput.text = ""
         searchInput.focus = false
         listView.focus = true
+        firstSearch = true;
+        textLength = 0;
+        listView.model = fullModel
     }
 
     Image {
@@ -111,8 +131,7 @@ Page {
                 searchInput.focus = false
                 listView.focus = true
             }
-            onTextChanged: {
-                filter = ""
+            onTextChanged: {            
                 if (Settings.getLiveSearch())
                     searchList(searchInput.text)
             }
@@ -129,7 +148,7 @@ Page {
                 width: 60
                 height: 60
                 anchors.centerIn: parent
-                enabled: searchInput.text != ""
+                //enabled: searchInput.text != ""
                 onClicked: filter == "" ? searchList(searchInput.text) : searchClear()
             }
         }

@@ -15,12 +15,6 @@ PageStackWindow {
 
     Component.onCompleted: {
         theme.inverted = true
-        Tables.openDatabase()
-        Tables.createMainTable()
-        Tables.createDetailsTable()
-        Tables.loadDataToModel()
-        Tables.tabliceTymczasowe()
-        mainPage.fullModel = Plates
     }
 
     platformStyle: PageStackWindowStyle {
