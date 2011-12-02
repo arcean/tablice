@@ -76,7 +76,7 @@ void Settings::setLiveSearch(bool enable)
 bool Settings::getLiveSearch()
 {
     QSettings settings;
-    bool value =  settings.value("searching/livesearch", true).toBool();
+    bool value =  settings.value("searching/livesearch", false).toBool();
 
     return value;
 }
