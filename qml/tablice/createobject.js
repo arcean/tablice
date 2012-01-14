@@ -18,20 +18,3 @@ function cloneObject(objectToClone) {
     return clone;
 }
 
-function cloneVideoObject(video, itemId) {
-    var videoItem = {};
-    if (itemId) {
-        videoItem["itemId"] = itemId;
-    }
-    else {
-        videoItem["itemId"] = video.itemId;
-    }
-    videoItem["title"] = video.title;
-    videoItem["fileName"] = video.fileName;
-    videoItem["name"] = video.title;
-    videoItem["url"] = video.url;
-    videoItem["filePath"] = video.filePath;
-    videoItem["duration"] = video.duration;
-    return videoItem;
-}
-

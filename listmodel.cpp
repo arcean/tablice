@@ -97,15 +97,10 @@ void ListModel::searchFor(const QString &value, bool mode)
 
     if(mode) {
         searchModel->clear();
-        foreach(PlateItem* item, m_list) {
-            cacheList.append(item);
-        }
+        cacheList = QList<PlateItem*>(m_list);
     }
-    else {
-        foreach(PlateItem* item, searchModel->m_list) {
-            cacheList.append(item);
-        }
-    }
+    else
+        cacheList = QList<PlateItem*>(searchModel->m_list);
 
     PlateItem *newItem;
     bool add = false;
@@ -113,22 +108,22 @@ void ListModel::searchFor(const QString &value, bool mode)
     if(number == -1) {
         foreach(PlateItem* item, cacheList) {
             add = false;
-            newItem = new PlateItem(item->name(), item->wojewodztwo());
 
             if(settings->getEnableSearchingByDistrict()) {
                 if(item->powiat().startsWith(newValue, Qt::CaseInsensitive))
                     add = true;
             }
-            if(settings->getEnableSearchingByCity()) {
+            if(!add && settings->getEnableSearchingByCity()) {
                 if(item->miasto().startsWith(newValue, Qt::CaseInsensitive))
                     add = true;
             }
-            if(settings->getEnableSearchingByDistrictB()) {
+            if(!add && settings->getEnableSearchingByDistrictB()) {
                 if(item->wojewodztwo().startsWith(newValue, Qt::CaseInsensitive))
                     add = true;
             }
 
             if(item->name().startsWith(newValue, Qt::CaseInsensitive) || add){
+                newItem = new PlateItem(item->name(), item->wojewodztwo());
                 newItem->setMiasto(item->miasto());
                 newItem->setPowiat(item->powiat());
                 cache->appendRow(newItem);
@@ -137,8 +132,8 @@ void ListModel::searchFor(const QString &value, bool mode)
     }
     else {
         foreach(PlateItem* item, cacheList) {
-            newItem = new PlateItem(item->name(), item->wojewodztwo());
             if(QString::compare(item->name(), newValue, Qt::CaseInsensitive) == 0){
+                newItem = new PlateItem(item->name(), item->wojewodztwo());
                 newItem->setMiasto(item->miasto());
                 newItem->setPowiat(item->powiat());
                 cache->appendRow(newItem);
@@ -146,10 +141,7 @@ void ListModel::searchFor(const QString &value, bool mode)
         }
     }
     searchModel->clear();
-    foreach(PlateItem* item, cache->m_list) {
-        searchModel->appendRow(item);
-    }
-
+    searchModel->m_list = QList<PlateItem*>(cache->m_list);
 }
 
 QModelIndex ListModel::indexFromItem(const PlateItem *item) const

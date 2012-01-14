@@ -12,6 +12,7 @@ PageStackWindow {
     property int _LARGE_FONT_SIZE: 40
 
     initialPage: mainPage
+    showStatusBar: appWindow.inPortrait
 
     Component.onCompleted: {
         theme.inverted = true
