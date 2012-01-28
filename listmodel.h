@@ -50,6 +50,9 @@ public slots:
     void searchFor(const QString &value, bool mode);
     int checkIfNumbersNow(QString data);
 
+signals:
+    void emptyList(bool isEmpty);
+
 private:
     PlateItem* m_prototype;
     QObject *parent;

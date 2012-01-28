@@ -4,6 +4,7 @@ import com.nokia.meego 1.0
 import "UIConstants.js" as UI
 
 Page {
+    id: page
     property string filter: ""
     property QtObject filtermodel: EmptyPlates
     property QtObject fullModel
@@ -19,11 +20,19 @@ Page {
         mainPage.fullModel = Plates;
     }
 
+    Connections {
+        /* Connect to signals from C++ object ListModel */
+
+        target: Plates
+        onEmptyList: noResultsText.visible = isEmpty;
+    }
+
     ToolBar {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         z: 10
+        visible: appWindow.inPortrait ? (page.height < 700 ? false : true) : (page.height < 360 ? false : true)
 
         platformStyle: ToolBarStyle {
             inverted: true
@@ -40,7 +49,7 @@ Page {
 
     Image {
         id: header
-        visible: parent.height > parent.width
+        visible: appWindow.inPortrait
         anchors {
             left: parent.left
             right: parent.right
@@ -91,6 +100,7 @@ Page {
 
     function searchClear()
     {
+        noResultsText.visible = false;
         filter = ""
         searchInput.text = ""
         searchInput.focus = false
@@ -107,7 +117,19 @@ Page {
         height: (searchItem.y + searchItem.height + 10) - y
         source: "images/toolbar-background.png"
         fillMode: Image.Stretch
+    }
 
+    Label {
+        id: noResultsText
+
+        anchors.centerIn: parent
+        font.pixelSize: _LARGE_FONT_SIZE
+        font.bold: true
+        color: "#4d4d4d"
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        text: "Nie znaleziono \npasujących tablic"
+        visible: false
     }
 
     Item {
@@ -119,7 +141,7 @@ Page {
             leftMargin: 20;
             right: parent.right;
             rightMargin: 20;
-            top: parent.height > parent.width ? header.bottom : parent.top;
+            top: appWindow.inPortrait ? header.bottom : parent.top;
             topMargin: 10
         }
 
@@ -166,7 +188,6 @@ Page {
                 width: 60
                 height: 60
                 anchors.centerIn: parent
-                //enabled: searchInput.text != ""
                 onClicked: filter == "" ? searchList(searchInput.text) : searchClear()
             }
         }
