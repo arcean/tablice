@@ -128,7 +128,7 @@ Page {
         color: "#4d4d4d"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        text: "Nie znaleziono \npasujących tablic"
+        text: appWindow.inPortrait ? "Nie znaleziono \npasujących tablic" : "Nie znaleziono pasujących tablic"
         visible: false
     }
 
