@@ -14,10 +14,8 @@ QueryDialog {
 
     Label {
         id: pageLabel
-        //anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         y: parent.height + 10
-        //x: (parent.width / 2) //- pageLabel.width
         font.pixelSize: _STANDARD_FONT_SIZE
         opacity: 0
         textFormat: Text.RichText
