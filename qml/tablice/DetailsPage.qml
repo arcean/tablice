@@ -9,10 +9,21 @@ Page {
     property string miasto: ""
     property string kod: ""
 
-    tools: ToolBarLayout {
-        ToolIcon {
-            platformIconId: "toolbar-back"
-            onClicked: appWindow.pageStack.pop()
+    ToolBar {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        z: 10
+
+        platformStyle: ToolBarStyle {
+            inverted: true
+            background: Qt.resolvedUrl("images/toolbar-background-transparent.png")
+        }
+        tools: ToolBarLayout {
+            ToolIcon {
+                platformIconId: "toolbar-back"
+                onClicked: appWindow.pageStack.pop()
+            }
         }
     }
 

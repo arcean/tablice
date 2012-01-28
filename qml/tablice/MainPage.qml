@@ -4,7 +4,6 @@ import com.nokia.meego 1.0
 import "UIConstants.js" as UI
 
 Page {
-    tools: commonTools
     property string filter: ""
     property QtObject filtermodel: EmptyPlates
     property QtObject fullModel
@@ -18,6 +17,25 @@ Page {
         Tables.loadDataToModel();
         Tables.tabliceTymczasowe();
         mainPage.fullModel = Plates;
+    }
+
+    ToolBar {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        z: 10
+
+        platformStyle: ToolBarStyle {
+            inverted: true
+            background: Qt.resolvedUrl("images/toolbar-background-transparent.png")
+        }
+        tools: ToolBarLayout {
+            ToolIcon {
+                platformIconId: "toolbar-settings"
+                anchors.right: parent.right
+                onClicked: showSettingsPage()
+            }
+        }
     }
 
     Image {

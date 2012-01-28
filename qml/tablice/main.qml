@@ -50,15 +50,4 @@ PageStackWindow {
         var inserSheet = ObjectCreator.createObject(Qt.resolvedUrl("InsertMainSheet.qml"), appWindow.pageStack);
         inserSheet.open();
     }
-
-    ToolBarLayout {
-        id: commonTools
-        visible: true
-
-        ToolIcon {
-            platformIconId: "toolbar-settings"
-            anchors.right: parent.right
-            onClicked: showSettingsPage()
-        }
-    }
 }

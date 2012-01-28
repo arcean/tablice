@@ -5,16 +5,28 @@ import "UIConstants.js" as UI
 
 Page {
     id: settingsPage
-    tools: ToolBarLayout {
-        ToolIcon {
-            platformIconId: "toolbar-back"
-            anchors.left: parent.left
-            onClicked: pageStack.pop()
+
+    ToolBar {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        z: 10
+
+        platformStyle: ToolBarStyle {
+            inverted: true
+            background: Qt.resolvedUrl("images/toolbar-background-transparent.png")
         }
-        ToolIcon {
-            platformIconId: "toolbar-tag"
-            anchors.right: parent.right
-            onClicked: appWindow.showAboutDialog()
+        tools: ToolBarLayout {
+            ToolIcon {
+                platformIconId: "toolbar-back"
+                anchors.left: parent.left
+                onClicked: pageStack.pop()
+            }
+            ToolIcon {
+                platformIconId: "toolbar-tag"
+                anchors.right: parent.right
+                onClicked: appWindow.showAboutDialog()
+            }
         }
     }
 
@@ -52,7 +64,7 @@ Page {
         }
 
         Separator {
-            y: title.y + 10
+            anchors.verticalCenter: title.verticalCenter
             anchors.left: title.right
             anchors.right: parent.right
         }
@@ -66,7 +78,7 @@ Page {
 
         MySwitch {
             id: searchByCitySwitch
-            y: searchByCity.y - 8
+            anchors.verticalCenter: searchByCity.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: UI.LISTDELEGATE_MARGIN
             checked: Settings.getEnableSearchingByCity()
@@ -84,7 +96,7 @@ Page {
 
         MySwitch {
             id: searchByDistrictSwitch
-            y: searchByDistrict.y - 8
+            anchors.verticalCenter: searchByDistrict.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: UI.LISTDELEGATE_MARGIN
             checked: Settings.getEnableSearchingByDistrict()
@@ -102,7 +114,7 @@ Page {
 
         MySwitch {
             id: searchByDistrictBSwitch
-            y: searchByDistrictB.y - 8
+            anchors.verticalCenter: searchByDistrictB.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: UI.LISTDELEGATE_MARGIN
             checked: Settings.getEnableSearchingByDistrictB()
@@ -119,8 +131,8 @@ Page {
         }
 
         Separator {
-            y: title2.y + 10
-            anchors.left: title.right
+            anchors.verticalCenter: title2.verticalCenter
+            anchors.left: title2.right
             anchors.right: parent.right
         }
 
@@ -133,7 +145,7 @@ Page {
 
         MySwitch {
             id: livesearchSwitch
-            y: livesearchLabel.y - 8
+            anchors.verticalCenter: livesearchLabel.verticalCenter
             anchors.right: parent.right
             anchors.rightMargin: UI.LISTDELEGATE_MARGIN
             checked: Settings.getLiveSearch()
