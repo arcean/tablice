@@ -7,6 +7,8 @@ Item {
     width: parent.width
     height: UI.THUMBNAIL_WRAPPER_SIDE + UI.THUMBNAIL_SPACING
 
+    //property bool vkb_visible: false
+
     Component.onCompleted: {
         decideMiastoOrPowiat(miasto, powiat, wojewodztwo)
     }
@@ -99,6 +101,11 @@ Item {
         id: mouseArea
 
         anchors.fill: parent
-        onClicked: showDetailsPage(name, miasto, powiat, wojewodztwo)
+        onClicked: {
+            //if (!vkb_visible)
+                showDetailsPage(name, miasto, powiat, wojewodztwo);
+            //else
+            //    parent.forceActiveFocus();
+        }
     }
 }

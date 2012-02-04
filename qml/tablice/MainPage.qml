@@ -74,8 +74,11 @@ Page {
         y: searchItem.y + searchItem.height + 10
         width: parent.width - 40
         height: parent.height - y
+
         model: Plates
-        delegate: MyDelegate {}
+        delegate: MyDelegate {
+            //vkb_visible: searchItem.focus
+        }
     }
     ScrollDecorator {
         flickableItem: listView
