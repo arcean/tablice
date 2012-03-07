@@ -1,3 +1,9 @@
+tablice (1.1.1) unstable; urgency=low
+
+  * Fix: hide vkb when user starts scrolling listView.
+
+ -- Tomasz Pieniążek <Tomek@unknown>  Sat, 07 Mar 2012 17:39:24 +0200
+
 tablice (1.1.0) unstable; urgency=low
 
   * Improved performance and UI.

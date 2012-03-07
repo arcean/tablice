@@ -79,6 +79,9 @@ Page {
         delegate: MyDelegate {
             //vkb_visible: searchItem.focus
         }
+        onMovementStarted: {
+            listView.focus = true;
+        }
     }
     ScrollDecorator {
         flickableItem: listView
