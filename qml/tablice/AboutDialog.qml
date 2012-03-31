@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 QueryDialog {
     id: dialog
 
-    titleText: "Tablice 1.1.1"
+    titleText: "Tablice 1.1.2"
     icon: "/usr/share/icons/hicolor/80x80/apps/tablice.png"
     message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011, 2012<br> Ikony: snejki<br><br>"
 
@@ -19,8 +19,8 @@ QueryDialog {
         font.pixelSize: _STANDARD_FONT_SIZE
         opacity: 0
         textFormat: Text.RichText
-        text: "Strona internetowa: <a href=\"http://www.maemo-forum.pl\">maemo-forum.pl</a>"
-        onLinkActivated: Qt.openUrlExternally("http://maemo-forum.pl/meego-tablice-vt2066.htm");
+        text: "Strona internetowa: <a href=\"http://www.meegoforum.pl\">meegoforum.pl</a>"
+        onLinkActivated: Qt.openUrlExternally("http://www.meegoforum.pl/viewtopic.php?f=56&t=82");
         transitions: Transition {
             from: ""; to: "show"; reversible: false
             ParallelAnimation {
