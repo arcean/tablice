@@ -80,7 +80,7 @@ Page {
         Label {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
-            x: (parent.width / 2) - titleLabel.width/2
+            x: UI.MARGIN_XLARGE
             text: "Szczegóły"
             color: "white"
             font.pixelSize: 26

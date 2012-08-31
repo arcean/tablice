@@ -42,7 +42,7 @@ Page {
         Label {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
-            x: (parent.width / 2) - titleLabel.width/2
+            x: UI.MARGIN_XLARGE
             text: "Ustawienia"
             color: "white"
             font.pixelSize: 26
@@ -51,27 +51,31 @@ Page {
 
     Flickable {
         anchors.fill: parent
-        anchors.leftMargin: UI.LISTDELEGATE_MARGIN
-        anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+        anchors.leftMargin: UI.MARGIN_XLARGE
+        anchors.rightMargin: UI.MARGIN_XLARGE
         contentHeight: parent.height + 1
+
+        Separator {
+            id: titleSeparator
+            anchors.verticalCenter: title.verticalCenter
+            anchors.left: parent.left
+            anchors.right: title.left
+            anchors.rightMargin: UI. MARGIN_XLARGE * 2
+        }
 
         Label {
             id: title
-            y: header.y + header.height + 20
-            text: "Wyszukuj po:  "
-            color: UI.LISTDELEGATE_TEXT_COLOR
-        }
-
-        Separator {
-            anchors.verticalCenter: title.verticalCenter
-            anchors.left: title.right
             anchors.right: parent.right
+            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            y: header.y + header.height + 20
+            text: "Wyszukuj po"
+            color: UI.LISTDELEGATE_TEXT_COLOR
         }
 
         Label {
             id: searchByCity
             y: title.y + title.height + 20
-            x: 2 * UI.LISTDELEGATE_MARGIN
+            x: UI.MARGIN_DEFAULT
             text: "nazwach miast"
         }
 
@@ -79,7 +83,7 @@ Page {
             id: searchByCitySwitch
             anchors.verticalCenter: searchByCity.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByCity()
             onCheckedChanged: {
                 Settings.setEnableSearchingByCity(checked)
@@ -89,7 +93,7 @@ Page {
         Label {
             id: searchByDistrict
             y: searchByCity.y + searchByCity.height + 20
-            x: 2 * UI.LISTDELEGATE_MARGIN
+            x: UI.MARGIN_DEFAULT
             text: "nazwach powiatów"
         }
 
@@ -97,7 +101,7 @@ Page {
             id: searchByDistrictSwitch
             anchors.verticalCenter: searchByDistrict.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByDistrict()
             onCheckedChanged: {
                 Settings.setEnableSearchingByDistrict(checked)
@@ -107,7 +111,7 @@ Page {
         Label {
             id: searchByDistrictB
             y: searchByDistrict.y + searchByDistrict.height + 20
-            x: 2 * UI.LISTDELEGATE_MARGIN
+            x: UI.MARGIN_DEFAULT
             text: "nazwach województw"
         }
 
@@ -115,30 +119,34 @@ Page {
             id: searchByDistrictBSwitch
             anchors.verticalCenter: searchByDistrictB.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByDistrictB()
             onCheckedChanged: {
                 Settings.setEnableSearchingByDistrictB(checked)
             }
         }
 
-        Label {
-            id: title2
-            y: searchByDistrictB.y + searchByDistrictB.height + 32
-            text: "Inne:  "
-            color: UI.LISTDELEGATE_TEXT_COLOR
+        Separator {
+            id: title2separator
+            anchors.left: parent.left
+            anchors.right: title2.left
+            anchors.rightMargin: UI. MARGIN_XLARGE * 2
+            anchors.verticalCenter: title2.verticalCenter
         }
 
-        Separator {
-            anchors.verticalCenter: title2.verticalCenter
-            anchors.left: title2.right
+        Label {
+            id: title2
             anchors.right: parent.right
+            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            y: searchByDistrictB.y + searchByDistrictB.height + 32
+            text: "Inne"
+            color: UI.LISTDELEGATE_TEXT_COLOR
         }
 
         Label {
             id: livesearchLabel
             y: title2.y + title2.height + 20
-            x: 2 * UI.LISTDELEGATE_MARGIN
+            x: UI.MARGIN_DEFAULT
             text: "wyszukuj na bieżąco"
         }
 
@@ -146,7 +154,7 @@ Page {
             id: livesearchSwitch
             anchors.verticalCenter: livesearchLabel.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
+            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getLiveSearch()
             onCheckedChanged: {
                 Settings.setLiveSearch(checked)
