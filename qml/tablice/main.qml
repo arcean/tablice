@@ -4,6 +4,7 @@ import "createobject.js" as ObjectCreator
 
 PageStackWindow {
     id: appWindow
+    property string _APP_VERSION: "1.1.3"
     property string _APP_COLOR: "color17"
     property string _ICON_LOCATION: "/usr/share/themes/blanco/meegotouch/icons/"
     property string _IMAGE_LOCATION: "/usr/share/themes/blanco/meegotouch/images/"
