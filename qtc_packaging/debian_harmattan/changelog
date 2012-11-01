@@ -1,3 +1,8 @@
+tablice (1.2.1) unstable; urgency=low
+  * Updated PageHeader.
+
+ -- Tomasz Pieniążek <t.pieniazek@gazeta.pl>  Thu, 01 Nov 2012 13:37:00 +0200
+
 tablice (1.2.0) unstable; urgency=low
   * Small improvements.
 

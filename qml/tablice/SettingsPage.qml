@@ -29,24 +29,15 @@ Page {
         }
     }
 
-    Image {
+    PageHeader {
         id: header
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
         }
-        z: 1
-        height: 72
-        source: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-view-header-fixed"
-        Label {
-            id: titleLabel
-            anchors.verticalCenter: parent.verticalCenter
-            x: UI.MARGIN_XLARGE
-            text: "Ustawienia"
-            color: "white"
-            font.pixelSize: 26
-        }
+
+        title: "Ustawienia"
     }
 
     Flickable {

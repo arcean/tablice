@@ -5,7 +5,7 @@ import "createobject.js" as ObjectCreator
 PageStackWindow {
     id: appWindow
     property string __APP_NAME: "Tablice"
-    property string __APP_VERSION: "1.2.0"
+    property string __APP_VERSION: "1.2.1"
     property string _ICON_LOCATION: "/usr/share/themes/blanco/meegotouch/icons/"
     property string _IMAGE_LOCATION: "/usr/share/themes/blanco/meegotouch/images/"
     // Theme:
@@ -16,7 +16,7 @@ PageStackWindow {
     // Font size:
     property int __SMALL_FONT_SIZE: 18
     property int __STANDARD_FONT_SIZE: 24
-    property int __HEADER_FONT_SIZE: 32
+    property int __HEADER_FONT_SIZE: 28
     property int __LARGE_FONT_SIZE: 40
     // Margins:
     property int __MARGIN: 16

@@ -47,7 +47,7 @@ Page {
         }
     }
 
-    Image {
+    PageHeader {
         id: header
         visible: appWindow.inPortrait
         anchors {
@@ -55,17 +55,8 @@ Page {
             right: parent.right
             top: parent.top
         }
-        z: 1
-        height: 72
-        source: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-view-header-fixed"
-        Label {
-            id: titleLabel
-            anchors.verticalCenter: parent.verticalCenter
-            x: UI.MARGIN_XLARGE
-            text: "Lista tablic rejestracyjnych"
-            color: "white"
-            font.pixelSize: 26
-        }
+
+        title: "Lista tablic rejestracyjnych"
     }
 
     ListView {
