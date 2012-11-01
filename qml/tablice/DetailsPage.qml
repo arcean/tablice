@@ -76,11 +76,11 @@ Page {
         }
         z: 1
         height: 72
-        source: "image://theme/" + appWindow._APP_COLOR + "-meegotouch-view-header-fixed"
+        source: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-view-header-fixed"
         Label {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
-            x: UI.MARGIN_XLARGE
+            x: __MARGIN
             text: "Szczegóły"
             color: "white"
             font.pixelSize: 26
@@ -96,64 +96,64 @@ Page {
             id: codeLabel
             y: header.y + header.height + 20
             anchors.left: parent.left
-            anchors.margins: UI.MARGIN_XLARGE
+            anchors.margins: __MARGIN
             text: "Kod tablicy: "
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: codeLabelDetails
             y: codeLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: kod
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
         }
         Label {
             id: wojewodztwoLabel
             y: codeLabelDetails.y + codeLabelDetails.height + 20
             anchors.left: parent.left
-            anchors.margins: UI.MARGIN_XLARGE
+            anchors.margins: __MARGIN
             text: "Województwo: "
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: wojewodztwoLabelDetails
             y: wojewodztwoLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: wojewodztwo
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
         }
         Label {
             id: powiatLabel
             y: wojewodztwoLabelDetails.y + wojewodztwoLabelDetails.height + 20
             anchors.left: parent.left
-            anchors.margins: UI.MARGIN_XLARGE
+            anchors.margins: __MARGIN
             text: "Powiat: "
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: powiatLabelDetails
             y: powiatLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: powiat
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
         }
         Label {
             id: miastoLabel
             y: powiatLabelDetails.y + powiatLabelDetails.height + 20
             anchors.left: parent.left
-            anchors.margins: UI.MARGIN_XLARGE
+            anchors.margins: __MARGIN
             text: "Miasto: "
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: miastoLabelDetails
             y: miastoLabel.y + 28
             x: parent.width > 480 ? parent.width / 2 : 90
             text: miasto
-            font.pixelSize: _STANDARD_FONT_SIZE
+            font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
         }
      }

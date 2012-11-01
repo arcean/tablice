@@ -57,7 +57,7 @@ Page {
         }
         z: 1
         height: 72
-        source: "image://theme/" + appWindow._APP_COLOR + "-meegotouch-view-header-fixed"
+        source: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-view-header-fixed"
         Label {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
@@ -129,7 +129,7 @@ Page {
         id: noResultsText
 
         anchors.centerIn: parent
-        font.pixelSize: _LARGE_FONT_SIZE
+        font.pixelSize: __LARGE_FONT_SIZE
         font.bold: true
         color: "#4d4d4d"
         horizontalAlignment: Text.AlignHCenter

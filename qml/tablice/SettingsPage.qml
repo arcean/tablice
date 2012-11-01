@@ -38,7 +38,7 @@ Page {
         }
         z: 1
         height: 72
-        source: "image://theme/" + appWindow._APP_COLOR + "-meegotouch-view-header-fixed"
+        source: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-view-header-fixed"
         Label {
             id: titleLabel
             anchors.verticalCenter: parent.verticalCenter
@@ -50,40 +50,37 @@ Page {
     }
 
     Flickable {
-        anchors.fill: parent
-        anchors.leftMargin: UI.MARGIN_XLARGE
-        anchors.rightMargin: UI.MARGIN_XLARGE
+        id: flickable
+        anchors.top: header.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: __MARGIN
+        anchors.rightMargin: __MARGIN
         contentHeight: parent.height + 1
 
-        Separator {
+        LabelSeparator {
             id: titleSeparator
-            anchors.verticalCenter: title.verticalCenter
+            anchors.top: parent.top
+            anchors.topMargin: __MARGIN
             anchors.left: parent.left
-            anchors.right: title.left
-            anchors.rightMargin: UI. MARGIN_XLARGE * 2
-        }
-
-        Label {
-            id: title
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
-            y: header.y + header.height + 20
+
             text: "Wyszukuj po"
-            color: UI.LISTDELEGATE_TEXT_COLOR
         }
 
         Label {
             id: searchByCity
-            y: title.y + title.height + 20
-            x: UI.MARGIN_DEFAULT
-            text: "nazwach miast"
+            anchors.left: parent.left
+            anchors.top: titleSeparator.bottom
+            anchors.topMargin: __MARGIN * 2
+            text: "Nazwach miast"
         }
 
         MySwitch {
             id: searchByCitySwitch
             anchors.verticalCenter: searchByCity.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByCity()
             onCheckedChanged: {
                 Settings.setEnableSearchingByCity(checked)
@@ -92,16 +89,16 @@ Page {
 
         Label {
             id: searchByDistrict
-            y: searchByCity.y + searchByCity.height + 20
-            x: UI.MARGIN_DEFAULT
-            text: "nazwach powiatów"
+            anchors.left: parent.left
+            anchors.top: searchByCity.bottom
+            anchors.topMargin: __MARGIN
+            text: "Nazwach powiatów"
         }
 
         MySwitch {
             id: searchByDistrictSwitch
             anchors.verticalCenter: searchByDistrict.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByDistrict()
             onCheckedChanged: {
                 Settings.setEnableSearchingByDistrict(checked)
@@ -110,51 +107,44 @@ Page {
 
         Label {
             id: searchByDistrictB
-            y: searchByDistrict.y + searchByDistrict.height + 20
-            x: UI.MARGIN_DEFAULT
-            text: "nazwach województw"
+            anchors.left: parent.left
+            anchors.top: searchByDistrict.bottom
+            anchors.topMargin: __MARGIN
+            text: "Nazwach województw"
         }
 
         MySwitch {
             id: searchByDistrictBSwitch
             anchors.verticalCenter: searchByDistrictB.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getEnableSearchingByDistrictB()
             onCheckedChanged: {
                 Settings.setEnableSearchingByDistrictB(checked)
             }
         }
 
-        Separator {
+        LabelSeparator {
             id: title2separator
+            anchors.top: searchByDistrictB.bottom
+            anchors.topMargin: __MARGIN * 2
             anchors.left: parent.left
-            anchors.right: title2.left
-            anchors.rightMargin: UI. MARGIN_XLARGE * 2
-            anchors.verticalCenter: title2.verticalCenter
-        }
-
-        Label {
-            id: title2
             anchors.right: parent.right
-            anchors.rightMargin: UI.LISTDELEGATE_MARGIN
-            y: searchByDistrictB.y + searchByDistrictB.height + 32
+
             text: "Inne"
-            color: UI.LISTDELEGATE_TEXT_COLOR
         }
 
         Label {
             id: livesearchLabel
-            y: title2.y + title2.height + 20
-            x: UI.MARGIN_DEFAULT
-            text: "wyszukuj na bieżąco"
+            anchors.left: parent.left
+            anchors.top: title2separator.bottom
+            anchors.topMargin: __MARGIN * 2
+            text: "Wyszukuj na bieżąco"
         }
 
         MySwitch {
             id: livesearchSwitch
             anchors.verticalCenter: livesearchLabel.verticalCenter
             anchors.right: parent.right
-            anchors.rightMargin: UI.MARGIN_DEFAULT
             checked: Settings.getLiveSearch()
             onCheckedChanged: {
                 Settings.setLiveSearch(checked)

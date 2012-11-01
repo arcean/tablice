@@ -4,13 +4,22 @@ import "createobject.js" as ObjectCreator
 
 PageStackWindow {
     id: appWindow
-    property string _APP_VERSION: "1.1.3"
-    property string _APP_COLOR: "color17"
+    property string __APP_NAME: "Tablice"
+    property string __APP_VERSION: "1.2.0"
     property string _ICON_LOCATION: "/usr/share/themes/blanco/meegotouch/icons/"
     property string _IMAGE_LOCATION: "/usr/share/themes/blanco/meegotouch/images/"
-    property int _SMALL_FONT_SIZE: 18
-    property int _STANDARD_FONT_SIZE: 24
-    property int _LARGE_FONT_SIZE: 40
+    // Theme:
+    property string __TEXT_COLOR: theme.inverted ? "white" : "black"
+    property string __ACTIVE_COLOR: "color17"
+    property string __ACTIVE_COLOR_TEXT: "#FF8F16"
+    property string __DISABLED_COLOR_TEXT: "#797979"
+    // Font size:
+    property int __SMALL_FONT_SIZE: 18
+    property int __STANDARD_FONT_SIZE: 24
+    property int __HEADER_FONT_SIZE: 32
+    property int __LARGE_FONT_SIZE: 40
+    // Margins:
+    property int __MARGIN: 16
 
     initialPage: mainPage
     showStatusBar: appWindow.inPortrait

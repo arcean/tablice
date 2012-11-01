@@ -3,6 +3,6 @@ import com.nokia.meego 1.0
 
 Switch {
     platformStyle: SwitchStyle {
-        switchOn: "image://theme/" + appWindow._APP_COLOR + "-meegotouch-switch-on"+__invertedString
+        switchOn: "image://theme/" + appWindow.__ACTIVE_COLOR + "-meegotouch-switch-on"+__invertedString
     }
 }

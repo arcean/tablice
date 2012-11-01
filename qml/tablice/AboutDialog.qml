@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 QueryDialog {
     id: dialog
 
-    titleText: "Tablice " + _APP_VERSION
+    titleText: "<font color=\"" + __ACTIVE_COLOR_TEXT + "\">" + __APP_NAME + " " + __APP_VERSION + "</font>"
     icon: "/usr/share/icons/hicolor/80x80/apps/tablice.png"
     message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011, 2012<br> Ikony: snejki<br><br>"
 
@@ -16,7 +16,7 @@ QueryDialog {
         id: pageLabel
         anchors.horizontalCenter: parent.horizontalCenter
         y: parent.height + 10
-        font.pixelSize: _STANDARD_FONT_SIZE
+        font.pixelSize: __SMALL_FONT_SIZE
         opacity: 0
         textFormat: Text.RichText
         text: "Strona internetowa: <a href=\"http://www.meegoforum.pl\">meegoforum.pl</a>"
