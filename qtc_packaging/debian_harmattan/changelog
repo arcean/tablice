@@ -1,3 +1,8 @@
+tablice (1.2.3) unstable; urgency=low
+  * A couple of minor visual fixes.
+
+ -- Tomasz Pieniążek <t.pieniazek@gazeta.pl>  Sun, 09 Dec 2012 17:24:00 +0200
+
 tablice (1.2.2) unstable; urgency=low
   * Updated splash screen.
 

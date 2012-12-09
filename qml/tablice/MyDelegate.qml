@@ -97,6 +97,16 @@ Item {
             }
         }
     }
+
+    Rectangle {
+        id: highlight
+
+        anchors.fill: parent
+        color: __ACTIVE_COLOR_TEXT
+        opacity: 0.3
+        visible: mouseArea.pressed
+    }
+
     MouseArea {
         id: mouseArea
 
