@@ -5,7 +5,6 @@ import "createobject.js" as ObjectCreator
 PageStackWindow {
     id: appWindow
     property string __APP_NAME: "Tablice"
-    property string __APP_VERSION: "1.2.3"
     property string _ICON_LOCATION: "/usr/share/themes/blanco/meegotouch/icons/"
     property string _IMAGE_LOCATION: "/usr/share/themes/blanco/meegotouch/images/"
     // Theme:

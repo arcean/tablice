@@ -17,6 +17,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setOrganizationName("arcean");
     app->setOrganizationDomain("arcean.com");
     app->setApplicationName("tablice");
+    app->setApplicationVersion(APP_VERSION);
 
     Settings settings;
     Tables tables;
@@ -26,6 +27,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     tables.setListModel(plates);
 
     QDeclarativeContext *context = view->rootContext();
+    context->setContextProperty("APP_VERSION", APP_VERSION);
     context->setContextProperty("Tables", &tables);
     context->setContextProperty("EmptyPlates", plates->searchModel);
     context->setContextProperty("Plates", plates);
