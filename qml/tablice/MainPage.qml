@@ -10,6 +10,8 @@ Page {
     property QtObject fullModel
     property bool firstSearch: true
     property int textLength: 0
+    property bool isFastScrollActive: false
+    state: "hideSearchField"
 
     Component.onCompleted: {
         Tables.openDatabase();
@@ -18,6 +20,28 @@ Page {
         Tables.loadDataToModel();
         Tables.tabliceTymczasowe();
         mainPage.fullModel = Plates;
+        fastScroll.listView = listViewMain;
+    }
+
+    states: [
+        State {
+            name: "hideSearchField"
+            PropertyChanges { target: searchBackground; opacity: 0; }
+            PropertyChanges { target: searchItem; opacity: 0; }
+            AnchorChanges { target: searchBackground; anchors.top: undefined; anchors.bottom: header.bottom; }
+            AnchorChanges { target: searchItem; anchors.top: undefined; anchors.bottom: header.bottom; }
+        },
+        State {
+            name: "showSearchField"
+            PropertyChanges { target: searchBackground; opacity: 1; }
+            PropertyChanges { target: searchItem; opacity: 1; }
+            AnchorChanges { target: searchBackground; anchors.bottom: undefined; anchors.top: header.bottom; }
+            AnchorChanges { target: searchItem; anchors.bottom: undefined; anchors.top: header.bottom; }
+        }
+    ]
+
+    transitions: Transition {
+        AnchorAnimation { duration: 150; }
     }
 
     Connections {
@@ -28,6 +52,7 @@ Page {
     }
 
     ToolBar {
+        id: toolbar
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -49,7 +74,7 @@ Page {
 
     PageHeader {
         id: header
-        visible: appWindow.inPortrait
+       //visible: appWindow.inPortrait
         anchors {
             left: parent.left
             right: parent.right
@@ -59,23 +84,76 @@ Page {
         title: "Lista tablic rejestracyjnych"
     }
 
+    Component {
+           id: sectionHeading
+
+           Rectangle {
+               width: parent.width
+               height: 50
+               color: "transparent"
+
+                Rectangle {
+                    id: divline
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: 16
+                    anchors.left: parent.left
+                    anchors.rightMargin: 16
+                    anchors.right: sectionLabel.left
+                    height: 1
+                    color: "gray"
+                    opacity: 0.6
+                }
+
+                Text {
+                    id: sectionLabel
+                    text: section
+                    font.pointSize: 18
+                    font.bold: true
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 16
+                    color: "gray"
+                }
+           }
+       }
+
     ListView {
-        id: listView
-        x: 20
-        y: searchItem.y + searchItem.height + 10
-        width: parent.width - 40
-        height: parent.height - y
+        id: listViewMain
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: searchBackground.bottom
+        anchors.bottom: toolbar.top
+
+        section.property: "category"
+        section.criteria: ViewSection.FullString
+        section.delegate: sectionHeading
 
         model: Plates
         delegate: MyDelegate {
             //vkb_visible: searchItem.focus
         }
+
         onMovementStarted: {
-            listView.focus = true;
+            listViewMain.focus = true;
         }
-    }
-    ScrollDecorator {
-        flickableItem: listView
+
+        onContentYChanged: {
+            if (visibleArea.yPosition < -0.001 && !searchTimer.shouldBeHidden
+                    && !isFastScrollActive) {
+                page.state = "showSearchField";
+                searchTimer.shouldBeHidden = true;
+                searchTimer.start();
+            }
+        }
+
+        FastScroll {
+            id: fastScroll
+            // Assign later, the listViewMain model has not been loaded yet.
+            //listView: listViewMain
+            onFastScrollPressed: {
+                isFastScrollActive = isActive;
+            }
+        }
     }
 
     function searchList(query)
@@ -86,12 +164,13 @@ Page {
 
         if(searchInput.text.length < textLength || !Settings.getLiveSearch())
             firstSearch = true;
+
         textLength = searchInput.text.length
         filter = query
-        listView.model = fullModel
+        listViewMain.model = fullModel
         Plates.searchFor(query, firstSearch)
         filtermodel = EmptyPlates
-        listView.model = filtermodel
+        listViewMain.model = filtermodel
         firstSearch = false;
     }
 
@@ -101,19 +180,10 @@ Page {
         filter = ""
         searchInput.text = ""
         searchInput.focus = false
-        listView.focus = true
+        listViewMain.focus = true
         firstSearch = true;
         textLength = 0;
-        listView.model = fullModel
-    }
-
-    Image {
-        x: 0
-        y: parent.height > parent.width ? header.x + header.height : 0
-        width: parent.width
-        height: (searchItem.y + searchItem.height + 10) - y
-        source: "images/toolbar-background.png"
-        fillMode: Image.Stretch
+        listViewMain.model = fullModel
     }
 
     Label {
@@ -129,20 +199,50 @@ Page {
         visible: false
     }
 
+    Timer {
+        id: searchTimer
+        interval: 5000
+        running: false
+        repeat: false
+
+        property bool shouldBeHidden: false
+
+        onTriggered: {
+            page.state = "hideSearchField";
+            shouldBeHidden = false;
+            searchClear();
+        }
+    }
+
+    Image {
+        id: searchBackground
+        anchors.top: undefined
+        anchors.bottom: header.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: 72 // 52 + 2 * 10 (margins)
+        smooth: true
+        source: "images/toolbar-background.png"
+        fillMode: Image.Stretch
+
+        Behavior on opacity { PropertyAnimation { duration: 250 } }
+    }
+
     Item {
         id: searchItem
 
-        height: searchInput.height
+        height: 52
         anchors {
             left: parent.left;
             leftMargin: 20;
             right: parent.right;
             rightMargin: 20;
-            top: appWindow.inPortrait ? header.bottom : parent.top;
+            top: undefined;//appWindow.inPortrait ? header.bottom : parent.top;
             topMargin: 10
+            bottom: header.bottom
         }
 
-        Behavior on opacity { PropertyAnimation { duration: 300 } }
+        Behavior on opacity { PropertyAnimation { duration: 250 } }
 
         MyTextField {
             id: searchInput
@@ -160,17 +260,22 @@ Page {
                 searchInput.platformCloseSoftwareInputPanel();
                 searchList(searchInput.text)
                 searchInput.focus = false
-                listView.focus = true
+                listViewMain.focus = true
             }
             Keys.onReturnPressed: {
                 searchInput.platformCloseSoftwareInputPanel();
                 searchList(searchInput.text)
                 searchInput.focus = false
-                listView.focus = true
+                listViewMain.focus = true
             }
-            onTextChanged: {            
+            onTextChanged: {
                 if (Settings.getLiveSearch())
                     searchList(searchInput.text)
+
+                if (searchTimer.shouldBeHidden && searchInput.text != "")
+                    searchTimer.stop();
+                else if (searchTimer.shouldBeHidden)
+                    searchTimer.start();
             }
         }
 

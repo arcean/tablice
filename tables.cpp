@@ -139,9 +139,20 @@ void Tables::loadDataToModel()
     int num = getIdsNumber();
 
     for (int i = 0; i < num; i++) {
-        item = new PlateItem(getTableCodeFromId(i), getWojewodztwoFromId(i));
+        QString name = getTableCodeFromId(i);
+        item = new PlateItem(name, getWojewodztwoFromId(i));
         item->setPowiat(getPowiatFromId(i));
         item->setMiasto(getMiastoFromId(i));
+        name.chop(name.length()-1);
+
+        /* Military plates. */
+        if (name.compare("U") == 0)
+            name = "Wojsko";
+
+        if (name.compare("H") == 0)
+            name = "Instytucje";
+
+        item->setCategory(name);
         model->appendRow(item);
     }
 }
@@ -189,6 +200,7 @@ void Tables::tabliceTymczasowe()
         item = new PlateItem(data[j] + QString::number(i), name[j]);
         item->setPowiat("Tablica tymczasowa");
         item->setMiasto("<t_tymcz>");
+        item->setCategory("Tymczasowe");
         model->appendRow(item);
     }
 }

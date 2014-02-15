@@ -11,6 +11,7 @@ ListModel::ListModel(PlateItem* prototype, QObject *parent) :
 int ListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
+
     return m_list.size();
 }
 

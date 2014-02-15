@@ -6,7 +6,7 @@ QueryDialog {
 
     titleText: "<font color=\"" + __ACTIVE_COLOR_TEXT + "\">" + __APP_NAME + " " + APP_VERSION + "</font>"
     icon: "/usr/share/icons/hicolor/80x80/apps/tablice.png"
-    message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011, 2012<br> Ikony: snejki<br><br>"
+    message: "Program umożliwia przeglądanie listy najpopularniejszych samochodowych tablic rejestracyjnych w Polsce. <br><br> &copy; Tomasz Pieniążek 2011 - 2013<br> Ikony: snejki<br><br>"
 
     Component.onCompleted: {
         pageLabel.state = "show";

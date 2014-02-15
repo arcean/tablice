@@ -1,3 +1,5 @@
+#include <QHash>
+
 #include "plateitem.h"
 
 PlateItem::PlateItem(const QString &name, const QString &wojewodztwo, QObject *parent) :
@@ -21,6 +23,7 @@ QHash<int, QByteArray> PlateItem::roleNames() const
 {
   QHash<int, QByteArray> names;
   names[NameRole] = "name";
+  names[CategoryRole] = "category";
   names[WojewodztwoRole] = "wojewodztwo";
   names[PowiatRole] = "powiat";
   names[MiastoRole] = "miasto";
@@ -32,6 +35,8 @@ QVariant PlateItem::data(int role) const
   switch(role) {
   case NameRole:
     return name();
+  case CategoryRole:
+    return category();
   case WojewodztwoRole:
     return wojewodztwo();
   case PowiatRole:

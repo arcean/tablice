@@ -79,11 +79,13 @@ Page {
     }
 
     Flickable {
-        width: parent.width
-        height: parent.height
+        anchors.top: header.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
         contentHeight: height + 1
 
-        Label {
+    /*    Label {
             id: codeLabel
             y: header.y + header.height + 20
             anchors.left: parent.left
@@ -98,7 +100,36 @@ Page {
             text: kod
             font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
+        }*/
+        Label {
+            id: codeLabelDetails
+            anchors.top: parent.top
+            anchors.topMargin:  parent.width > 480 ? 0 : __MARGIN
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: kod + " ..."
+            font.pixelSize: 72
+            color: UI.LISTDELEGATE_TEXT_COLOR
         }
+
+        Label {
+            id: wojewodztwoLabel
+            anchors.top: codeLabelDetails.bottom
+            anchors.topMargin: parent.width > 480 ? __MARGIN : __MARGIN * 2
+            anchors.left: parent.left
+            anchors.leftMargin: __MARGIN
+            text: "Województwo: "
+            font.pixelSize: __STANDARD_FONT_SIZE
+        }
+
+        Label {
+            id: wojewodztwoLabelDetails
+            anchors.top: wojewodztwoLabel.bottom
+            x: parent.width > 480 ? parent.width / 2 : 90
+            text: wojewodztwo
+            font.pixelSize: __STANDARD_FONT_SIZE
+            color: UI.LISTDELEGATE_TEXT_COLOR
+        }
+/*
         Label {
             id: wojewodztwoLabel
             y: codeLabelDetails.y + codeLabelDetails.height + 20
@@ -114,18 +145,19 @@ Page {
             text: wojewodztwo
             font.pixelSize: __STANDARD_FONT_SIZE
             color: UI.LISTDELEGATE_TEXT_COLOR
-        }
+        }*/
         Label {
             id: powiatLabel
-            y: wojewodztwoLabelDetails.y + wojewodztwoLabelDetails.height + 20
+            anchors.top: wojewodztwoLabelDetails.bottom
+            anchors.topMargin: __MARGIN * 2
             anchors.left: parent.left
-            anchors.margins: __MARGIN
+            anchors.leftMargin: __MARGIN
             text: "Powiat: "
             font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: powiatLabelDetails
-            y: powiatLabel.y + 28
+            anchors.top: powiatLabel.bottom
             x: parent.width > 480 ? parent.width / 2 : 90
             text: powiat
             font.pixelSize: __STANDARD_FONT_SIZE
@@ -133,15 +165,16 @@ Page {
         }
         Label {
             id: miastoLabel
-            y: powiatLabelDetails.y + powiatLabelDetails.height + 20
+            anchors.top: powiatLabelDetails.bottom
+            anchors.topMargin: __MARGIN * 2
             anchors.left: parent.left
-            anchors.margins: __MARGIN
+            anchors.leftMargin: __MARGIN
             text: "Miasto: "
             font.pixelSize: __STANDARD_FONT_SIZE
         }
         Label {
             id: miastoLabelDetails
-            y: miastoLabel.y + 28
+            anchors.top: miastoLabel.bottom
             x: parent.width > 480 ? parent.width / 2 : 90
             text: miasto
             font.pixelSize: __STANDARD_FONT_SIZE

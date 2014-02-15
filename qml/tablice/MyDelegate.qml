@@ -5,7 +5,7 @@ import "createobject.js" as ObjectCreator
 
 Item {
     width: parent.width
-    height: UI.THUMBNAIL_WRAPPER_SIDE + UI.THUMBNAIL_SPACING
+    height: UI.DELEGATE_HEIGHT
 
     //property bool vkb_visible: false
 
@@ -13,8 +13,7 @@ Item {
         decideMiastoOrPowiat(miasto, powiat, wojewodztwo)
     }
 
-    function showDetailsPage(kod, miasto, powiat, wojewodztwo)
-    {
+    function showDetailsPage(kod, miasto, powiat, wojewodztwo) {
         var detailsPage = ObjectCreator.createObject(Qt.resolvedUrl("DetailsPage.qml"), appWindow.pageStack);
         detailsPage.kod = kod
         detailsPage.miasto = miasto
@@ -24,21 +23,20 @@ Item {
         appWindow.pageStack.push(detailsPage);
     }
 
-    function decideMiastoOrPowiat(miasto, powiat, wojewodztwo)
-    {
-        if(miasto == "<t_tymcz>") {
+    function decideMiastoOrPowiat(miasto, powiat, wojewodztwo) {
+        if (miasto == "<t_tymcz>") {
             wojewodztwoText.text = "Tablica tymczasowa"
             powiatMiastoText.text = "Województwo: " + wojewodztwo
         }
-        else if(miasto == "<army>") {
+        else if (miasto == "<army>") {
             wojewodztwoText.text = "Tablica wojskowa"
             powiatMiastoText.text = "Pojazd: " + wojewodztwo
         }
-        else if(miasto == "<spec>") {
+        else if (miasto == "<spec>") {
             wojewodztwoText.text = "Tablica instytucji:"
             powiatMiastoText.text = powiat
         }
-        else if(powiat == "") {
+        else if (powiat == "") {
             powiatMiastoText.text = "Miasto: " + miasto
         }
         else
@@ -48,22 +46,22 @@ Item {
     Column {
         id: textColumn
 
+        anchors.top: parent.top
+        anchors.topMargin: UI.LISTDELEGATE_MARGIN
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: UI.LISTDELEGATE_MARGIN
         anchors.left: parent.left
-        anchors.leftMargin: UI.LISTDELEGATE_MARGIN
-        anchors.rightMargin: UI.LISTDELEGATE_MARGIN
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: UI.LISTDELEGATE_MARGIN * 2
+        anchors.rightMargin: UI.LISTDELEGATE_MARGIN * 2
         anchors.right: parent.right
         spacing: 0
         Text {
             id: title
             text: name + " ..."
             color: UI.LISTDELEGATE_TITLE_COLOR
-            width: parent.width
             font.bold: true
             font.pixelSize: 26
             elide: Text.ElideRight
-            style: Text.Raised
-            styleColor: UI.LISTDELEGATE_STYLE_COLOR
         }
         Item {
             width: parent.width
@@ -73,27 +71,21 @@ Item {
                 id: wojewodztwoText
                 text: "Województwo: " + wojewodztwo
                 color: UI.LISTDELEGATE_TEXT_COLOR
-                width: parent.width
                 font.bold: true
                 font.pixelSize: 18
                 elide: Text.ElideRight
-                style: Text.Raised
-                styleColor: UI.LISTDELEGATE_STYLE_COLOR
             }
             Image {
-                anchors { right: parent.right; rightMargin: 20; }//top: title.bottom}
-                source: theme.inverted ? "images/drilldown-arrow-white.png" : "images/drilldown-arrow.png"
+                anchors { right: parent.right;}//top: title.bottom}
+                source: "images/drilldown-arrow-white.png"
             }
             Text {
                 y: wojewodztwoText.y + wojewodztwoText.height
                 id: powiatMiastoText
                 color: UI.LISTDELEGATE_TEXT_COLOR
-                width: parent.width
                 font.bold: true
                 font.pixelSize: 18
                 elide: Text.ElideRight
-                style: Text.Raised
-                styleColor: UI.LISTDELEGATE_STYLE_COLOR
             }
         }
     }

@@ -4,7 +4,7 @@ import com.nokia.meego 1.0
 Image {
     id: header
     z: 1
-    height: 72
+    height: width < 481 ? 72 : 48
     source: "image://theme/" + __ACTIVE_COLOR + "-meegotouch-view-header-fixed"
 
     property alias title: titleLabel.text

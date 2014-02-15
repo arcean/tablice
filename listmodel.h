@@ -8,34 +8,26 @@
 #include "plateitem.h"
 #include "settings.h"
 
-class ListItem: public QObject {
-  Q_OBJECT
-
-public:
-  ListItem(QObject* parent = 0) : QObject(parent) {}
-  virtual ~ListItem() {}
-  virtual QString id() const = 0;
-  virtual QVariant data(int role) const = 0;
-  virtual QHash<int, QByteArray> roleNames() const = 0;
-
-signals:
-  void dataChanged();
-};
-
 class ListModel : public QAbstractListModel
 {
-  Q_OBJECT
+    Q_OBJECT
+    // Needed to make SectionScroller happy.
+    Q_PROPERTY(int count READ rowCount)
 
 public:
     explicit ListModel(PlateItem* prototype, QObject* parent = 0);
     ~ListModel();
     void setSettings(Settings *settings);
 
+    // Needed to make SectionScroller happy.
+    Q_INVOKABLE PlateItem* get(int index) { return new PlateItem(m_list.at(index)); }
+    Q_INVOKABLE QString getCategoryStr(int index) { return m_list.at(index)->category(); }
+    Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
+
     ListModel* searchModel;
     QList<PlateItem*> m_list;
 
 public slots:
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     void appendRow(PlateItem* item);
     void appendRows(const QList<PlateItem*> &items);
