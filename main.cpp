@@ -33,7 +33,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     context->setContextProperty("Plates", plates);
     context->setContextProperty("Settings", &settings);
 
-    view->setViewport(new QGLWidget());
+    view->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->setAttribute(Qt::WA_NoSystemBackground);
+    view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
     view->setSource(QUrl::fromLocalFile("/opt/tablice/qml/tablice/main.qml"));
 
     view->showFullScreen();
